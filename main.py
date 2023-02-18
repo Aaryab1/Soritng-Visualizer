@@ -3,6 +3,7 @@ from tkinter import ttk #ttk stands for themed tkinter
 from bubblesort import bubble_sort
 import random
 from quicksort import quick_sort
+from merge_sort import merge_sort
 main = Tk()
 main.title("Sorting Visualizer")
 main.geometry('900x600+400+80') #+400 and + 80 is set where i want my window to pop out
@@ -18,6 +19,10 @@ def StartAlgorithm():
 
     elif algo_menu.get()=="Bubble Sort":
         bubble_sort(data,drawData,speedscale.get())
+    
+    elif algo_menu.get() == "Merge Sort":
+        merge_sort(data,drawData,speedscale.get())
+        drawData(data,['green' for x in range(len(data))] )
 
 def drawData(data,colorArray):
     canvas.delete('all')
@@ -82,7 +87,7 @@ mainlabel.place(x=0,y=0)
 
 
 algo_menu = ttk.Combobox(main,width = 15,font = ('new roman',19,"italic bold"),textvariable=selected_algorithm,
-            values=['Bubble Sort','Morge Sort',"Quick Sort"])
+            values=['Bubble Sort','Merge Sort',"Quick Sort"])
 algo_menu.place(x =145,y=0)
 algo_menu.current(0) #by default bubble sort
 
