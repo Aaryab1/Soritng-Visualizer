@@ -126,7 +126,7 @@ start =Button(main,text="Start",bg="#C45B09",font = ("arial",12,"italic bold"),r
                 activebackground="#05945B",activeforeground="white",bd=5,width=10,command=StartAlgorithm)
 start.place(x = 750,y=0)
 
-speedlabel = Label(main, text = "Speed : ", font = ("new roman",16,"italic bold"),bg="#0E6DA5",
+speedlabel = Label(main, text = "Time Delay: ", font = ("new roman",16,"italic bold"),bg="#0E6DA5",
                 width = 10,fg = 'black',relief = GROOVE,bd=5 )
 speedlabel.place(x=400,y=0)
 
