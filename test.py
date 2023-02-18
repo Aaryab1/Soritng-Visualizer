@@ -1,27 +1,61 @@
-# data = [1,2,3,4,5]
-# canvas_height = 450
-# canvas_width = 870
-# x_width = canvas_width / (len(data)+1)
-# offset = 10
-# spacing_bet_rect = 10
-# normalised_data = [i / max(data) for i in data]
-# print(normalised_data)
-# for i ,height in enumerate(normalised_data):
-#     print(i,height)
-#     x0 = i*x_width + offset + spacing_bet_rect
-#     y0 = canvas_height - height *400  #we have multiplied 400 because we will normalised our values with one
-#                                        # formila so that our data won't exceed our canvas
-#     x1 = (i+1) * x_width
-#     y1 = canvas_height
-#     print(f"({x0},{y0})\t({x1},{y1})")
+import customtkinter
+from PIL import Image
+import os
+
+customtkinter.set_appearance_mode("dark")
 
 
+class App(customtkinter.CTk):
+    width = 900
+    height = 600
 
-    # canvas.create_rectangle(x0,y0,x1,y1,fill = "#A90042")
-    # canvas.create_text((x0+2),y0,anchor=  SW,text = str(data[i]),font = ("new roman",15,"italic bold"),fill = "orange")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-# color = ['red' for x in range(3)]
-# print(color)
+        self.title("CustomTkinter example_background_image.py")
+        self.geometry(f"{self.width}x{self.height}")
+        self.resizable(False, False)
 
-data = [1,2,3,4,5,6,7]
-print(data[:len(data)-1])
+        # load and create background image
+        current_path = os.path.dirname(os.path.realpath(__file__))
+        self.bg_image = customtkinter.CTkImage(Image.open(current_path + "/test_images/bg_gradient.jpg"),
+                                               size=(self.width, self.height))
+        self.bg_image_label = customtkinter.CTkLabel(self, image=self.bg_image)
+        self.bg_image_label.grid(row=0, column=0)
+
+        # create login frame
+        self.login_frame = customtkinter.CTkFrame(self, corner_radius=0)
+        self.login_frame.grid(row=0, column=0, sticky="ns")
+        self.login_label = customtkinter.CTkLabel(self.login_frame, text="CustomTkinter\nLogin Page",
+                                                  font=customtkinter.CTkFont(size=20, weight="bold"))
+        self.login_label.grid(row=0, column=0, padx=30, pady=(150, 15))
+        self.username_entry = customtkinter.CTkEntry(self.login_frame, width=200, placeholder_text="username")
+        self.username_entry.grid(row=1, column=0, padx=30, pady=(15, 15))
+        self.password_entry = customtkinter.CTkEntry(self.login_frame, width=200, show="*", placeholder_text="password")
+        self.password_entry.grid(row=2, column=0, padx=30, pady=(0, 15))
+        self.login_button = customtkinter.CTkButton(self.login_frame, text="Login", command=self.login_event, width=200)
+        self.login_button.grid(row=3, column=0, padx=30, pady=(15, 15))
+
+        # create main frame
+        self.main_frame = customtkinter.CTkFrame(self, corner_radius=0)
+        self.main_frame.grid_columnconfigure(0, weight=1)
+        self.main_label = customtkinter.CTkLabel(self.main_frame, text="CustomTkinter\nMain Page",
+                                                 font=customtkinter.CTkFont(size=20, weight="bold"))
+        self.main_label.grid(row=0, column=0, padx=30, pady=(30, 15))
+        self.back_button = customtkinter.CTkButton(self.main_frame, text="Back", command=self.back_event, width=200)
+        self.back_button.grid(row=1, column=0, padx=30, pady=(15, 15))
+
+    def login_event(self):
+        print("Login pressed - username:", self.username_entry.get(), "password:", self.password_entry.get())
+
+        self.login_frame.grid_forget()  # remove login frame
+        self.main_frame.grid(row=0, column=0, sticky="nsew", padx=100)  # show main frame
+
+    def back_event(self):
+        self.main_frame.grid_forget()  # remove main frame
+        self.login_frame.grid(row=0, column=0, sticky="ns")  # show login frame
+
+
+if __name__ == "__main__":
+    app = App()
+    app.mainloop()
