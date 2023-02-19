@@ -1,6 +1,6 @@
 message_begin = '''About This:
 
-With our interactive tool, you can select from a range of popular sorting algorithms, such as bubble sort, selection sort, merge sort, quick sort, and many more to come. Watch as the algorithms sort your input data in real-time, displaying each step of the sorting process and the changes made at each iteration
+With our interactive tool, you can select from a range of popular sorting algorithms, such as bubble sort, selection sort, merge sort, quick sort, and many more to come. Watch as the algorithms sort random genrated data in real-time, displaying each step of the sorting process and the changes made at each iteration
  '''
 
 message_qucik ='''Quick Sort:
