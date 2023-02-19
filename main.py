@@ -8,6 +8,7 @@ from quicksort import quick_sort
 from merge_sort import merge_sort
 from selection_sort import selection_sort
 from message import *
+from insertion import insertion_Sort
 main = Tk()
 main.title("Sorting Visualizer")
 main.geometry('1400x670+50+50') 
@@ -29,6 +30,9 @@ def Info():
     
     elif selected_algorithm.get() == "Selection Sort":
         message = message_selection
+
+    elif selected_algorithm.get() == "Insertion Sort":
+        message = message_insert
     
     else:
         message = message_begin
@@ -57,6 +61,9 @@ def StartAlgorithm():
 
     elif algo_menu.get() == "Selection Sort":
         selection_sort(data,drawData,speedscale.get())
+    
+    elif algo_menu.get() == "Insertion Sort":
+        insertion_Sort(data,drawData,speedscale.get())
 
 def drawData(data,colorArray):
     canvas.delete('all')
@@ -121,7 +128,7 @@ mainlabel.grid(row=0,column=0)
 
 
 algo_menu = ttk.Combobox(main,width = 15,font = ('new roman',19,"bold"),textvariable=selected_algorithm,
-            values=['Bubble Sort','Merge Sort',"Quick Sort","Selection Sort"])
+            values=['Bubble Sort','Merge Sort',"Quick Sort","Selection Sort","Insertion Sort"])
 algo_menu.grid(row = 0 , column =1,padx=5)
 algo_menu.current(0) #by default bubble sort
 
